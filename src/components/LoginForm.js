@@ -11,7 +11,7 @@ const schema = yup.object({
 }).required();
 
 function RegisterForm() {
-    
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
@@ -32,7 +32,7 @@ function RegisterForm() {
     )
 
     const onSubmit = (data) => {
-       mutation.mutate(data);
+        mutation.mutate(data);
     };
     if (mutation.isSuccess) {
         console.log(mutation.data.data);
@@ -41,7 +41,7 @@ function RegisterForm() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-fit mx-auto py-6 px-10 shadow-lg border rounded bg-white absolute top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2">
             <p className="text-center">Sign In Form</p>
-            {mutation.isError && <p className="border border-red-500 text-red-500 p-2 text-center my-2">{mutation.error.response.data.message}</p>}
+            {mutation.isError && <p className="border border-red-500 text-red-500 p-2 text-center my-2">{mutation.error.response?.data?.message || mutation.error.message}</p>}
             <div className="flex flex-col">
                 <label htmlFor="username">Username</label>
                 <input name="username" type="text" className="min-w-[30vw] px-4 py-2 rounded mb-1 mt-2 border border-gray-400 outline-cyan-300" {...register("username")} placeholder="Username" />
@@ -53,7 +53,7 @@ function RegisterForm() {
                 <input name="password" type="password" className="min-w-[30vw] px-4 py-2 rounded mb-1 mt-2 border border-gray-400 outline-cyan-300" {...register("password")} placeholder="Password" />
                 <p className="mb-4 text-red-500">{errors.password?.message}</p>
             </div>
-            <button type="submit" className="py-1 rounded w-full text-center bg-green-400 block hover:bg-green-300" >Sign in</button>
+            <button type="submit" className={mutation.isLoading ? "py-1 rounded w-full text-center bg-green-300 block" : "py-1 rounded w-full text-center bg-green-400 block hover:bg-green-300"}>Sign in</button>
             <Link className="text-center mb-2 mt-4 block w-full underline" to="/register">Create Account</Link>
         </form>
     );

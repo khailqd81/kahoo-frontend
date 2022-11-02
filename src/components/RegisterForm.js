@@ -146,7 +146,7 @@ return (
             </select>
             <p className="mb-4 text-red-500 text-sm">{errors.roles?.message}</p>
         </div>
-        <button type="submit" className="py-1 rounded w-full text-center bg-green-400 block hover:bg-green-300" >Sign up</button>
+        <button type="submit" className={mutation.isLoading ? "py-1 rounded w-full text-center bg-green-300 block":"py-1 rounded w-full text-center bg-green-400 block hover:bg-green-300" }>Sign up</button>
         <Link className="text-center mb-2 mt-4 block w-full underline" to="/login">Login</Link>
     </form>
 );
