@@ -1,24 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import { Outlet } from 'react-router-dom';
+import { QueryClientProvider, QueryClient } from 'react-query';
+const queryClient = new QueryClient()
 
 function App() {
+
+  // const handleSubmitForm = (values) => {
+  //   axios.post(`${process.env.REACT_APP_API_ENDPOINT}/register`, {
+  //     ...values,
+  //   roles:["Student"]})
+  //   .then(function (response) {
+  //     if (response.status === 201) {
+  //       setRegisterSuccess(true);
+  //       setErrorFromServer("");
+  //     } 
+  //   })
+  //   .catch(function (error) {
+  //     console.log("error:" ,error);
+  //     setErrorFromServer(error.response.data.message);
+
+  //   });
+  // }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <QueryClientProvider client={queryClient}>
+    <div className='container mx-auto'>
+      <div className=''>
+          <Outlet />
+      </div>
     </div>
+    </QueryClientProvider>
   );
 }
 
